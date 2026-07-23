@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Entry Research: Using MarketLine Advantage — INTB 1203 | Northeastern University</title>
+<meta name="description" content="An interactive tutorial for INTB 1203 students on using MarketLine Advantage for company and country research to support the Market Entry Project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+  :root {
+    /* Brand — AAA-adjusted: --nu-red is used for TEXT/interactive elements (7.9:1 on white).
+       --nu-red-bright is DECORATIVE ONLY (borders, thin accents, large ≥24px headline spans). */
+    --nu-red:        #A30F27;   /* 7.9:1 on white — safe for text, links, buttons at any size */
+    --nu-red-dark:   #7C0C1E;   /* hover/active — even higher contrast */
+    --nu-red-bright: #C8102E;   /* official Husky red — decorative accents only, not small text */
+    --nu-red-tint:   #FBEAEC;
+    --nu-red-border: #E8B8C0;
+
+    --text-primary:   #1A1A1A; /* ~18.5:1 on white */
+    --text-secondary: #333333; /* ~12.6:1 on white */
+    --text-muted:     #4D4D4D; /* ~8.5:1 on white */
+
+    --bg-page:    #F4F4F5;
+    --bg-white:   #FFFFFF;
+    --bg-subtle:  #F8F8F8;
+    --border:     #C7C7C7;
+    --border-dark:#6E6E6E;      /* ~4.6:1 — meets 3:1 non-text UI contrast */
+    --focus:      #0046B3;      /* ~8.3:1 — safe for focus rings and link text */
+
+    --success:    #145A32;      /* ~8.3:1 on white */
+    --info-bg:    #EBF3FF;
+    --info-border:#7EB8F7;
+    --info-text:  #0C3B72;
+    --tip-bg:     #EDFAF3;
+    --tip-border: #7ECBA1;
+    --tip-text:   #0D4D26;
+    --warn-bg:    #FFF8E6;
+    --warn-border:#D4A017;
+    --warn-text:  #5C3D00;      /* ~9.3:1 on --warn-bg */
+    --error-text: #9B0000;      /* ~8.8:1 on white */
+    --error-bg:   #FEF2F2;
+    --error-border:#DC2626;
+
+    --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+    --font-sans:  'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+    --radius-sm:  4px;
+    --radius:     8px;
+    --radius-lg:  12px;
+    --shadow:     0 1px 4px rgba(0,0,0,0.10), 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  @media (prefers-contrast: high) {
+    :root {
+      --nu-red: #000000; --nu-red-dark:#000000; --nu-red-bright:#000000;
+      --border-dark:#000000; --border:#000000; --focus:#000000;
+      --text-primary:#000000; --text-secondary:#000000; --text-muted:#000000;
+    }
+  }
+
+  body { font-family: var(--font-sans); font-size: 1rem; line-height: 1.7; color: var(--text-primary); background: var(--bg-page); min-height: 100vh; }
+
+  .skip-link { position: absolute; top: -100%; left: 0; z-index: 10000; padding: 12px 20px; background: var(--focus); color: #fff; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; border-radius: 0 0 var(--radius) 0; transition: top 0.1s; }
+  .skip-link:focus { top: 0; outline: 3px solid #fff; outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  #live-region { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+  :focus:not(:focus-visible) { outline: none; }
+
+  header { background: var(--nu-red); color: #fff; padding: 0 24px; }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 14px 0; }
+  .nu-mark { flex-shrink: 0; width: 48px; height: 48px; background: #fff; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; }
+  .nu-mark svg { display: block; }
+  .header-copy { flex: 1; min-width: 0; }
+  .header-copy h1 { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+  .header-copy p { font-size: 0.82rem; opacity: 0.96; margin-top: 3px; font-family: var(--font-sans); }
+
+  .progress-wrapper { background: var(--bg-white); border-bottom: 2px solid var(--border); }
+  .progress-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .steps-list { display: flex; align-items: stretch; list-style: none; gap: 0; white-space: nowrap; min-width: min-content; }
+  .step-connector { flex: 0 0 20px; display: flex; align-items: center; justify-content: center; }
+  .step-connector::after { content: ''; display: block; width: 100%; height: 2px; background: var(--border-dark); }
+  .step-connector.done::after { background: var(--success); }
+  .step-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 6px; min-height: 44px; background: none; border: none; cursor: default; font-family: var(--font-sans); font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+  .step-btn[data-state="done"] { color: var(--success); cursor: pointer; }
+  .step-btn[data-state="done"]:hover { text-decoration: underline; }
+  .step-btn[data-state="current"] { color: var(--nu-red); font-weight: 700; }
+  .step-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; border: 2px solid currentColor; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; transition: background 0.15s, color 0.15s; }
+  .step-btn[data-state="done"] .step-num { background: var(--success); color: #fff; border-color: var(--success); }
+  .step-btn[data-state="current"] .step-num { background: var(--nu-red); color: #fff; border-color: var(--nu-red); }
+  @media (max-width: 600px) { .step-label-text { display: none; } }
+
+  main { max-width: 900px; margin: 32px auto 80px; padding: 0 20px; }
+  .step-panel { display: none; }
+  .step-panel[data-active="true"] { display: block; animation: panelIn 0.22s ease both; }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow); }
+  @media (max-width: 600px) { .card { padding: 24px 20px; } }
+  .card-header { border-bottom: 3px solid var(--nu-red-bright); padding-bottom: 14px; margin-bottom: 22px; }
+  .step-counter { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--nu-red); margin-bottom: 6px; }
+  .card h2 { font-family: var(--font-serif); font-size: 1.65rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+  h3 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: var(--text-primary); margin: 26px 0 10px; }
+  h4 { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 14px 0 6px; }
+
+  p { color: var(--text-secondary); margin-bottom: 2.6em; line-height: 1.7; max-width: 70ch; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { margin: 6px 0 2em 22px; color: var(--text-secondary); line-height: 1.7; max-width: 70ch; }
+  li { margin-bottom: 10px; }
+  strong { color: var(--text-primary); font-weight: 700; }
+  a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover, a:focus-visible { color: #002E73; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 26px 0; }
+
+  .callout { border-radius: var(--radius); padding: 18px 22px; margin: 16px 0 24px; }
+  .callout p { margin: 0; font-size: 0.94rem; line-height: 1.65; max-width: none; }
+  .callout p + p { margin-top: 10px; }
+  .callout-info { background: var(--info-bg); border: 1px solid var(--info-border); border-left: 4px solid var(--nu-red-bright); }
+  .callout-info p { color: var(--info-text); }
+  .callout-info strong { color: #08284F; }
+  .callout-tip { background: var(--tip-bg); border: 1px solid var(--tip-border); border-left: 4px solid var(--success); }
+  .callout-tip p { color: var(--tip-text); }
+  .callout-tip strong { color: var(--success); }
+  .callout-warn { background: var(--warn-bg); border: 1px solid var(--warn-border); border-left: 4px solid #8A5A00; }
+  .callout-warn p { color: var(--warn-text); }
+  .callout-title { font-family: var(--font-sans); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; display: block; color: inherit; }
+  .callout ul { margin: 6px 0 0 20px; max-width: none; }
+  .callout li { font-size: 0.92rem; }
+
+  .duration-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--nu-red-tint); color: var(--nu-red-dark); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--nu-red-border); margin-bottom: 14px; }
+
+  .form-group { margin-bottom: 28px; }
+  .form-label { display: block; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .form-label .req { color: var(--nu-red); margin-left: 3px; }
+  .hint { font-size: 0.86rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.55; display: block; }
+  input[type="text"], textarea { display: block; width: 100%; font-family: var(--font-sans); font-size: 1rem; color: var(--text-primary); background: var(--bg-white); border: 2px solid var(--border-dark); border-radius: var(--radius); padding: 11px 14px; line-height: 1.55; transition: border-color 0.15s; }
+  input[type="text"]:focus, textarea:focus { border-color: var(--focus); }
+  input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--error-text); border-width: 2px; }
+  textarea { resize: vertical; min-height: 100px; }
+  .error-msg { display: none; margin-top: 7px; font-size: 0.88rem; font-weight: 700; color: var(--error-text); font-family: var(--font-sans); }
+  .error-msg[aria-hidden="false"] { display: flex; align-items: flex-start; gap: 6px; }
+  .error-icon { flex-shrink: 0; width: 16px; height: 16px; margin-top: 1px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 11px 24px; min-height: 44px; min-width: 44px; border-radius: var(--radius); border: 2px solid transparent; cursor: pointer; text-decoration: none; transition: background 0.15s, border-color 0.15s, color 0.15s; white-space: nowrap; }
+  .btn-primary { background: var(--nu-red); color: #fff; border-color: var(--nu-red); }
+  .btn-primary:hover { background: var(--nu-red-dark); border-color: var(--nu-red-dark); }
+  .btn-secondary { background: var(--bg-white); color: var(--text-primary); border-color: var(--border-dark); }
+  .btn-secondary:hover { background: var(--bg-subtle); border-color: var(--text-muted); }
+  .btn-success { background: var(--success); color: #fff; border-color: var(--success); }
+  .btn-success:hover { background: #0E3F24; border-color: #0E3F24; }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; justify-content: flex-end; }
+  @media (max-width: 480px) { .btn { width: 100%; } .btn-group { flex-direction: column-reverse; } }
+
+  .hero { text-align: center; padding: 28px 16px 24px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--nu-red-tint); color: var(--nu-red-dark); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 18px; font-family: var(--font-sans); border: 1px solid var(--nu-red-border); }
+  .hero h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--text-primary); line-height: 1.25; margin-bottom: 14px; }
+  .hero p { max-width: 58ch; margin: 0 auto; font-size: 1.03rem; color: var(--text-secondary); }
+  .completion-check { width: 60px; height: 60px; border-radius: 50%; background: var(--tip-bg); border: 2px solid var(--success); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+
+  .objectives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 22px; }
+  @media (max-width: 560px) { .objectives-grid { grid-template-columns: 1fr; } }
+  .objective-item { background: var(--bg-subtle); border: 1px solid var(--border); border-left: 3px solid var(--nu-red-bright); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 15px; }
+  .objective-item p { font-size: 0.84rem; color: var(--text-secondary); margin: 0; line-height: 1.55; max-width: none; }
+  .objective-item strong { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nu-red); display: block; margin-bottom: 4px; font-family: var(--font-sans); }
+
+  .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0 22px; }
+  @media (max-width: 640px) { .overview-grid { grid-template-columns: 1fr; } }
+  .overview-item { background: var(--bg-subtle); border: 1px solid var(--border); border-top: 3px solid var(--nu-red-bright); border-radius: var(--radius); padding: 14px 16px; }
+  .overview-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5; max-width: none; }
+
+  .step-list { display: grid; gap: 12px; margin: 18px 0 24px; }
+  .demo-step { background: var(--bg-subtle); border: 1px solid var(--border); border-left: 4px solid var(--nu-red-bright); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; }
+  .demo-step-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-primary); margin-bottom: 8px; }
+  .demo-step p { max-width: none; margin-bottom: 0.6em; }
+  .demo-step ul { max-width: none; margin: 6px 0 0 20px; }
+  .demo-step li { font-size: 0.92rem; margin-bottom: 6px; }
+
+  .mode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 18px 0 26px; }
+  .mode-card { background: var(--bg-subtle); border: 1px solid var(--border); border-top: 4px solid var(--nu-red-bright); border-radius: var(--radius); padding: 16px; }
+  .mode-card-title { font-family: var(--font-serif); font-weight: 700; font-size: 0.98rem; color: var(--text-primary); margin-bottom: 6px; }
+  .mode-card p { font-size: 0.86rem; color: var(--text-muted); margin: 0; line-height: 1.5; max-width: none; }
+
+  .context-box { background: var(--info-bg); border: 1px solid var(--info-border); border-radius: var(--radius); padding: 14px 18px; margin: 0 0 22px; }
+  .context-box p { color: var(--info-text); font-size: 0.92rem; margin: 0; max-width: none; }
+
+  .link-card { display: flex; align-items: center; gap: 14px; background: var(--bg-white); border: 2px solid var(--border-dark); border-radius: var(--radius); padding: 16px 18px; margin: 16px 0 24px; }
+  .link-card-icon { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--nu-red-tint); display: flex; align-items: center; justify-content: center; }
+  .link-card-body { flex: 1; min-width: 0; }
+  .link-card-body p { margin: 2px 0 0; font-size: 0.85rem; color: var(--text-muted); max-width: none; }
+  .link-card a.db-link { font-weight: 700; font-size: 1rem; word-break: break-word; }
+
+  .checklist { display: grid; gap: 10px; margin: 14px 0 22px; }
+  .checklist-item { display: flex; align-items: flex-start; gap: 10px; background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; }
+  .checklist-item .ci-mark { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--tip-bg); border: 1px solid var(--tip-border); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .checklist-item p { margin: 0; font-size: 0.9rem; max-width: none; }
+  .checklist-item strong { color: var(--text-primary); }
+
+  .cite-example { background: var(--bg-subtle); border: 1px dashed var(--border-dark); border-radius: var(--radius); padding: 13px 16px; font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 0.86rem; color: var(--text-primary); margin: 10px 0 0; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+  .cite-label { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 6px; display: block; }
+
+  .summary-item { margin-bottom: 20px; }
+  .summary-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--nu-red); margin-bottom: 6px; font-family: var(--font-sans); }
+  .summary-value { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 16px; font-family: var(--font-sans); font-size: 0.93rem; color: var(--text-primary); white-space: pre-wrap; line-height: 1.65; min-height: 44px; }
+
+  .contact-line { font-size: 0.86rem; color: var(--text-muted); margin-top: 6px; }
+
+  footer { text-align: center; padding: 26px 20px; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 10px; }
+  footer p { max-width: none; color: var(--text-muted); }
+  footer p + p { margin-top: 6px; }
+
+  @media print {
+    header, .progress-wrapper, .btn-group, footer { display: none !important; }
+    .step-panel { display: block !important; page-break-after: always; }
+    .card { box-shadow: none; border: 1px solid #000; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="live-region" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header role="banner">
+  <div class="header-inner">
+    <div class="nu-mark" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="3" y="24" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#A30F27">N</text>
+      </svg>
+    </div>
+    <div class="header-copy">
+      <h1>Market Entry Research: Using MarketLine Advantage</h1>
+      <p>INTB 1203 &nbsp;&middot;&nbsp; Northeastern University Library</p>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="Tutorial steps">
+  <div class="progress-wrapper">
+    <div class="progress-inner">
+      <ol class="steps-list" id="steps-list">
+        <li><button class="step-btn" data-step="0" data-state="current" aria-current="step" aria-disabled="false" aria-label="Step 1: Welcome — current step"><span class="step-num" aria-hidden="true">1</span><span class="step-label-text">Welcome</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="1" data-state="todo" disabled aria-disabled="true" aria-label="Step 2: Introduction — not yet reached"><span class="step-num" aria-hidden="true">2</span><span class="step-label-text">Introduction</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="2" data-state="todo" disabled aria-disabled="true" aria-label="Step 3: Corporate Research Demo — not yet reached"><span class="step-num" aria-hidden="true">3</span><span class="step-label-text">Corporate Demo</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="3" data-state="todo" disabled aria-disabled="true" aria-label="Step 4: Corporate Guided Practice — not yet reached"><span class="step-num" aria-hidden="true">4</span><span class="step-label-text">Corporate Practice</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="4" data-state="todo" disabled aria-disabled="true" aria-label="Step 5: Country and Market Demo — not yet reached"><span class="step-num" aria-hidden="true">5</span><span class="step-label-text">Country Demo</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="5" data-state="todo" disabled aria-disabled="true" aria-label="Step 6: Country Guided Practice — not yet reached"><span class="step-num" aria-hidden="true">6</span><span class="step-label-text">Country Practice</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="6" data-state="todo" disabled aria-disabled="true" aria-label="Step 7: Wrap-Up and Next Steps — not yet reached"><span class="step-num" aria-hidden="true">7</span><span class="step-label-text">Wrap-Up</span></button></li>
+        <li class="step-connector" aria-hidden="true"></li>
+        <li><button class="step-btn" data-step="7" data-state="todo" disabled aria-disabled="true" aria-label="Step 8: Review and Download — not yet reached"><span class="step-num" aria-hidden="true">8</span><span class="step-label-text">Review &amp; Download</span></button></li>
+      </ol>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+
+  <!-- STEP 0: WELCOME -->
+  <section class="step-panel" id="step-0" data-active="true" aria-labelledby="s0-heading">
+    <div class="card">
+      <div class="hero">
+        <div class="hero-badge" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="5" fill="#A30F27"/></svg> INTB 1203 &middot; Market Entry Project</div>
+        <h2 id="s0-heading">Market Entry Research:<br>Using MarketLine Advantage</h2>
+        <p>This tutorial walks you through MarketLine Advantage &mdash; the database you'll use to research companies and countries for your Market Entry Project &mdash; and builds a personal set of research notes you can download.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="overview-grid" role="list">
+        <div class="overview-item" role="listitem"><p><strong>Duration:</strong> approx. 40 minutes</p></div>
+        <div class="overview-item" role="listitem"><p><strong>Format:</strong> Guided walkthrough + hands-on practice</p></div>
+        <div class="overview-item" role="listitem"><p><strong>Audience:</strong> Undergraduates working on market entry projects</p></div>
+      </div>
+
+      <h3 style="margin-top:0;">Learning Objectives</h3>
+      <p>By the end of this session, you will be able to:</p>
+      <div class="objectives-grid" role="list">
+        <div class="objective-item" role="listitem">
+          <strong>Navigate MarketLine</strong>
+          <p>Find company profiles and financial information.</p>
+        </div>
+        <div class="objective-item" role="listitem">
+          <strong>Research Countries</strong>
+          <p>Locate country-specific economic data and market analysis reports.</p>
+        </div>
+        <div class="objective-item" role="listitem">
+          <strong>Evaluate Opportunities</strong>
+          <p>Identify key data points for evaluating market entry opportunities.</p>
+        </div>
+        <div class="objective-item" role="listitem">
+          <strong>Cite Your Sources</strong>
+          <p>Export and cite MarketLine sources appropriately for your project.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-tip" role="note">
+        <p><strong>What you'll do:</strong> Learn what MarketLine Advantage is &rarr; walk through researching a company &rarr; practice on your own company &rarr; walk through researching a country &rarr; practice on your own target country &rarr; review tips and support &rarr; download your research notes and a MarketLine quick-reference handout.</p>
+      </div>
+
+      <div class="form-group" style="margin-top: 26px;">
+        <label class="form-label" for="student-name">Your Full Name <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="name-hint">This will appear on your downloadable research notes.</span>
+        <input type="text" id="student-name" name="student-name" autocomplete="name" aria-required="true" aria-describedby="name-hint name-error" placeholder="e.g., Jordan Rivera" spellcheck="false">
+        <span class="error-msg" id="name-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please enter your full name to begin.
+        </span>
+      </div>
+
+      <div class="btn-group" style="justify-content: flex-start;">
+        <button class="btn btn-primary" onclick="startTutorial()" type="button">
+          Begin Tutorial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1: INTRODUCTION -->
+  <section class="step-panel" id="step-1" data-active="false" aria-labelledby="s1-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 1 of 7</p>
+        <h2 id="s1-heading">Introduction</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">3 minutes</div>
+
+      <h3 style="margin-top:0;">Connect to the Project</h3>
+      <p>For your market entry project, you need to make two critical decisions: <strong>which company will expand</strong>, and <strong>where should they expand</strong>? MarketLine Advantage is a database that will give you corporate intelligence and country analysis to make informed decisions about both.</p>
+
+      <h3>What Is MarketLine Advantage?</h3>
+      <ul>
+        <li>A professional-grade business database used by consultants and analysts.</li>
+        <li>Contains company profiles, industry reports, and country intelligence.</li>
+        <li>Updated regularly with financial data, SWOT analyses, and market forecasts.</li>
+      </ul>
+
+      <div class="callout callout-info" role="note">
+        <p>You'll use MarketLine for both halves of your project: <strong>company research</strong> (who is expanding) and <strong>country research</strong> (where they're expanding to). Enter what you're considering so far below &mdash; it's fine if this changes as you research.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-company">Company You're Considering <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="company-hint">The company your team is exploring for the project.</span>
+        <input type="text" id="ws-company" name="ws-company" aria-required="true" aria-describedby="company-hint company-error" placeholder="e.g., Starbucks, Nike, or IKEA" spellcheck="false">
+        <span class="error-msg" id="company-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please enter a company to continue.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-country">Target Country You're Considering <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="country-hint">A country you're thinking about as a possible market.</span>
+        <input type="text" id="ws-country" name="ws-country" aria-required="true" aria-describedby="country-hint country-error" placeholder="e.g., Vietnam or Brazil" spellcheck="false">
+        <span class="error-msg" id="country-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please enter a target country to continue.
+        </span>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(0)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="validate('intro', 2)" type="button">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: PART 1 DEMO — CORPORATE RESEARCH -->
+  <section class="step-panel" id="step-2" data-active="false" aria-labelledby="s2-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 2 of 7</p>
+        <h2 id="s2-heading">Part 1: Corporate Research</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">15 minutes &mdash; demo</div>
+
+      <p>Follow along with each step below in your own MarketLine session &mdash; open the link, then work through Steps 1&ndash;4 before moving on to your guided practice.</p>
+
+      <div class="link-card">
+        <div class="link-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 6a2 2 0 0 1 2-2h5v14h-9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h0" stroke="#A30F27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="link-card-body">
+          <a class="db-link" href="https://link.ezproxy.neu.edu/login?url=https://new.marketline.com/Account/IPAccessLogin" target="_blank" rel="noopener noreferrer">Open MarketLine Advantage</a>
+          <p>Sign in with your Northeastern credentials through the library portal link above.</p>
+        </div>
+      </div>
+
+      <div class="step-list">
+        <div class="demo-step">
+          <div class="demo-step-title">Step 1 &mdash; Accessing the Database</div>
+          <p>Log in through the library portal link above. Take a moment to look over the main search interface before searching.</p>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-title">Step 2 &mdash; Company Search</div>
+          <p>Search for a well-known company (e.g., Starbucks, Nike, or IKEA) to see how the database works, then filter your results by <strong>"Companies"</strong>.</p>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-title">Step 3 &mdash; Company Profile Deep Dive</div>
+          <p>Open a company profile and walk through these four key sections:</p>
+          <div class="mode-grid" role="list">
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Overview</div>
+              <p>Business model, products/services, geographic presence.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Financial Performance</div>
+              <p>Revenue trends, profitability, growth trajectory.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Operations</div>
+              <p>Current markets, competitive position.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">SWOT Analysis</div>
+              <p>Strengths that could support expansion, plus weaknesses to consider.</p>
+            </div>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-title">Step 4 &mdash; Exporting Data</div>
+          <p>Look for the download or print options on the profile, and locate the citation tool (or note the report details you'll need to cite it yourself).</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info" role="note">
+        <span class="callout-title">Key Questions to Consider</span>
+        <ul>
+          <li>What are this company's core strengths?</li>
+          <li>Where do they currently operate? Are there obvious gaps?</li>
+          <li>What does their financial health tell you about expansion capacity?</li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(1)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="goToStep(3)" type="button">Continue to Guided Practice &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: PART 1 GUIDED PRACTICE -->
+  <section class="step-panel" id="step-3" data-active="false" aria-labelledby="s3-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 3 of 7</p>
+        <h2 id="s3-heading">Guided Practice: Your Company</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">5 minutes</div>
+
+      <div class="context-box" id="corp-context-box" role="note">
+        <p id="corp-context-text">Now it's your turn.</p>
+      </div>
+
+      <p>Take 5 minutes to search MarketLine for the company your team is considering. Look at their company profile and jot down what you find.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-geo-markets">Geographic Markets Where They Currently Operate <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="geo-hint">List the regions or countries where this company already does business.</span>
+        <textarea id="ws-geo-markets" aria-required="true" aria-describedby="geo-hint geo-error" placeholder="e.g., United States, Canada, Western Europe, parts of East Asia..."></textarea>
+        <span class="error-msg" id="geo-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note the company's current markets before continuing.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-strength">One Key Strength That Would Support International Expansion <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="strength-hint">Drawn from the company's SWOT analysis or financial performance.</span>
+        <textarea id="ws-strength" aria-required="true" aria-describedby="strength-hint strength-error" placeholder="e.g., Strong brand recognition, healthy profit margins, an established supply chain..."></textarea>
+        <span class="error-msg" id="strength-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note one key strength before continuing.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-weakness">One Challenge or Weakness to Keep in Mind <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="weakness-hint">Something from the SWOT analysis or financials that could complicate expansion.</span>
+        <textarea id="ws-weakness" aria-required="true" aria-describedby="weakness-hint weakness-error" placeholder="e.g., Thin margins in some segments, limited brand awareness abroad, supply chain risk..."></textarea>
+        <span class="error-msg" id="weakness-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note one challenge or weakness before continuing.
+        </span>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(2)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="validate('corp-practice', 4)" type="button">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: PART 2 DEMO — COUNTRY & MARKET ANALYSIS -->
+  <section class="step-panel" id="step-4" data-active="false" aria-labelledby="s4-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 4 of 7</p>
+        <h2 id="s4-heading">Part 2: Country &amp; Market Analysis</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">15 minutes &mdash; demo</div>
+
+      <div class="step-list">
+        <div class="demo-step">
+          <div class="demo-step-title">Step 1 &mdash; Country Reports</div>
+          <p>Search for a country report in MarketLine (e.g., "Vietnam" or "Brazil") and navigate to that country's profile.</p>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-title">Step 2 &mdash; Essential Data for Market Entry</div>
+          <p>These are the sections most relevant to your project:</p>
+          <div class="mode-grid" role="list">
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Economic Overview</div>
+              <p>GDP, growth rate, economic stability.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Political Environment</div>
+              <p>Regulatory climate, ease of doing business.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Demographics</div>
+              <p>Population size, age distribution, urbanization.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Consumer Market</div>
+              <p>Spending patterns, middle class growth.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Infrastructure</div>
+              <p>Transportation, digital connectivity.</p>
+            </div>
+            <div class="mode-card" role="listitem">
+              <div class="mode-card-title">Industry Analysis</div>
+              <p>Specific industry reports for your company's sector.</p>
+            </div>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-title">Step 3 &mdash; Cross-Referencing Industry Reports</div>
+          <p>Search for industry reports by country (e.g., "retail industry in Mexico"). These reports show sector-specific opportunities and challenges within that country.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info" role="note">
+        <span class="callout-title">Making the Connection</span>
+        <p>Ask yourself: Does this country's economic profile align with your company's products or services? Is the market growing? What are the barriers to entry?</p>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(3)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="goToStep(5)" type="button">Continue to Guided Practice &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: PART 2 GUIDED PRACTICE -->
+  <section class="step-panel" id="step-5" data-active="false" aria-labelledby="s5-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 5 of 7</p>
+        <h2 id="s5-heading">Guided Practice: Your Target Country</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">5 minutes</div>
+
+      <div class="context-box" id="country-context-box" role="note">
+        <p id="country-context-text">Pick a potential target country and spend 5 minutes exploring.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-econ-indicator">One Economic Indicator That Suggests Opportunity <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="econ-hint">For example, GDP growth or a rising middle class.</span>
+        <textarea id="ws-econ-indicator" aria-required="true" aria-describedby="econ-hint econ-error" placeholder="e.g., GDP growth of 6% annually, a fast-growing urban middle class..."></textarea>
+        <span class="error-msg" id="econ-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note one economic indicator before continuing.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-challenge">One Potential Challenge <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="challenge-hint">For example, regulatory barriers or infrastructure gaps.</span>
+        <textarea id="ws-challenge" aria-required="true" aria-describedby="challenge-hint challenge-error" placeholder="e.g., Strict import regulations, limited transportation infrastructure outside major cities..."></textarea>
+        <span class="error-msg" id="challenge-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note one potential challenge before continuing.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ws-industry-report">Industry Report Relevant to Your Company's Sector <span class="req" aria-label="required">*</span></label>
+        <span class="hint" id="industry-hint">Note the report title and its key finding.</span>
+        <textarea id="ws-industry-report" aria-required="true" aria-describedby="industry-hint industry-error" placeholder="e.g., 'Retail Industry in Mexico' — highlights strong e-commerce growth..."></textarea>
+        <span class="error-msg" id="industry-error" role="alert" aria-hidden="true" aria-live="assertive">
+          <svg class="error-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#9B0000" stroke-width="2"/><path d="M8 5v3.5M8 11h.01" stroke="#9B0000" stroke-width="2" stroke-linecap="round"/></svg>
+          Please note an industry report before continuing.
+        </span>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(4)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="validate('country-practice', 6)" type="button">Continue &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6: WRAP-UP & NEXT STEPS -->
+  <section class="step-panel" id="step-6" data-active="false" aria-labelledby="s6-heading">
+    <div class="card">
+      <div class="card-header">
+        <p class="step-counter" aria-hidden="true">Step 6 of 7</p>
+        <h2 id="s6-heading">Wrap-Up &amp; Next Steps</h2>
+      </div>
+      <div class="duration-badge" aria-hidden="true">5 minutes</div>
+
+      <h3 style="margin-top:0;">Quick Recap</h3>
+      <ul>
+        <li>You now know how to find company intelligence and country data in MarketLine Advantage.</li>
+        <li>Use company profiles to justify your company selection.</li>
+        <li>Use country reports to build your argument for why a specific country is the right target.</li>
+      </ul>
+
+      <h3>Tips for the Project</h3>
+      <ul>
+        <li>Combine company strengths with country opportunities to tell a compelling story.</li>
+        <li>Use MarketLine to evaluate 2&ndash;3 countries before choosing your final target.</li>
+        <li>Keep track of reports and data for your citations.</li>
+        <li>If MarketLine doesn't have everything, note what other databases or sources you might need &mdash; and come back to the library for help.</li>
+      </ul>
+
+      <h3>Where to Get Help</h3>
+      <div class="checklist" role="list">
+        <div class="checklist-item" role="listitem">
+          <span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <p><strong>Library website</strong> &mdash; visit the <a href="https://subjectguides.lib.neu.edu/international_business" target="_blank" rel="noopener noreferrer">Northeastern University Library</a> for full database access.</p>
+        </div>
+        <div class="checklist-item" role="listitem">
+          <span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <p><strong>Research guides</strong> &mdash; see the <a href="https://subjectguides.lib.neu.edu/international_business" target="_blank" rel="noopener noreferrer">International Business Subject Guide</a> for more databases beyond MarketLine.</p>
+        </div>
+        <div class="checklist-item" role="listitem">
+          <span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <p><strong>Schedule a consultation</strong> &mdash; if your team needs deeper assistance, contact <a href="mailto:li.reilly@northeastern.edu">Lily Reilly</a>, Entrepreneurship Librarian.</p>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(5)" type="button">&larr; Back</button>
+        <button class="btn btn-primary" onclick="goToStep(7)" type="button">Continue to Review &amp; Download &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 7: REVIEW & DOWNLOAD -->
+  <section class="step-panel" id="step-7" data-active="false" aria-labelledby="s7-heading">
+    <div class="card">
+      <div class="completion-check" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#145A32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-header" style="border-bottom:none; text-align:center; padding-bottom:0;">
+        <p class="step-counter" aria-hidden="true">Step 7 of 7</p>
+        <h2 id="s7-heading">Review &amp; Download</h2>
+      </div>
+
+      <h3 style="margin-top:0;">Your Research Notes</h3>
+      <p>Review your answers below. To make changes, use the step tracker at the top of the page to return to any completed step, then come back here.</p>
+
+      <div class="summary-item">
+        <p class="summary-label">Company</p>
+        <div class="summary-value" id="sum-company"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Target Country</p>
+        <div class="summary-value" id="sum-country"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Geographic Markets Where They Currently Operate</p>
+        <div class="summary-value" id="sum-geo"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Key Strength Supporting Expansion</p>
+        <div class="summary-value" id="sum-strength"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Challenge or Weakness</p>
+        <div class="summary-value" id="sum-weakness"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Economic Indicator Suggesting Opportunity</p>
+        <div class="summary-value" id="sum-econ"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Potential Challenge in Target Country</p>
+        <div class="summary-value" id="sum-challenge"></div>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Relevant Industry Report</p>
+        <div class="summary-value" id="sum-industry"></div>
+      </div>
+
+      <hr class="divider">
+
+      <h3 style="margin-top:0;">MarketLine Quick-Reference Handout</h3>
+
+      <h4 style="margin-top:0;">Accessing MarketLine</h4>
+      <p>Sign in through the library portal: <a href="https://link.ezproxy.neu.edu/login?url=https://new.marketline.com/Account/IPAccessLogin" target="_blank" rel="noopener noreferrer">link.ezproxy.neu.edu &rarr; MarketLine Advantage</a>, using your Northeastern username and password.</p>
+
+      <h4>Company Research Checklist</h4>
+      <div class="checklist" role="list">
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Overview</strong> &mdash; business model, products/services, geographic presence</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Financial Performance</strong> &mdash; revenue trends, profitability, growth trajectory</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Operations</strong> &mdash; current markets, competitive position</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>SWOT Analysis</strong> &mdash; strengths supporting expansion, weaknesses to consider</p></div>
+      </div>
+
+      <h4>Country Analysis Checklist</h4>
+      <div class="checklist" role="list">
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Economic Overview</strong> &mdash; GDP, growth rate, economic stability</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Political Environment</strong> &mdash; regulatory climate, ease of doing business</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Demographics</strong> &mdash; population size, age distribution, urbanization</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Consumer Market</strong> &mdash; spending patterns, middle class growth</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Infrastructure</strong> &mdash; transportation, digital connectivity</p></div>
+        <div class="checklist-item" role="listitem"><span class="ci-mark" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="#145A32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>Industry Analysis</strong> &mdash; sector-specific reports for your company</p></div>
+      </div>
+
+      <h4>Citation Format (APA)</h4>
+      <p>Confirm the exact style your instructor requires. A typical APA-style citation for a MarketLine report looks like:</p>
+      <div class="cite-example">
+        <span class="cite-label">Company profile</span>
+        MarketLine. (Year). <em>[Company name]: Company profile.</em> MarketLine.
+      </div>
+      <div class="cite-example" style="margin-top:12px;">
+        <span class="cite-label">Country report</span>
+        MarketLine. (Year). <em>[Country name]: In-depth PESTLE insights.</em> MarketLine.
+      </div>
+
+      <div class="callout callout-info" role="note" style="margin-top:22px;">
+        <p>Need more help? Visit the <a href="https://subjectguides.lib.neu.edu/international_business" target="_blank" rel="noopener noreferrer">International Business Subject Guide</a>, or contact your subject librarian.</p>
+        <p class="contact-line">Lily Reilly, Entrepreneurship Librarian &mdash; <a href="mailto:li.reilly@northeastern.edu">li.reilly@northeastern.edu</a></p>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="goToStep(6)" type="button">&larr; Back</button>
+        <button class="btn btn-secondary" onclick="if(confirm('Start over? This will clear all of your answers.')) location.reload();" type="button">&#8635; Start Over</button>
+        <button class="btn btn-success" id="download-btn" onclick="downloadPDF()" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Research Notes as PDF
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer role="contentinfo">
+  <p>Northeastern University Library &middot; INTB 1203 &mdash; Market Entry Research: Using MarketLine Advantage</p>
+  <p>Designed to meet WCAG 2.1 AA guidelines throughout, with AAA-level enhancements including 7:1 text contrast, extended focus management, and a reviewable, correctable set of notes before download.</p>
+</footer>
+
+<script>
+  'use strict';
+  let currentStep = 0;
+
+  function announce(msg) {
+    const region = document.getElementById('live-region');
+    region.textContent = '';
+    requestAnimationFrame(() => { requestAnimationFrame(() => { region.textContent = msg; }); });
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function goToStep(targetStep) {
+    document.getElementById('step-' + currentStep).dataset.active = 'false';
+    document.getElementById('step-' + targetStep).dataset.active = 'true';
+    const buttons = document.querySelectorAll('.step-btn');
+    const connectors = document.querySelectorAll('.step-connector');
+    buttons.forEach((btn, i) => {
+      btn.removeAttribute('aria-current');
+      if (i < targetStep) {
+        btn.dataset.state = 'done'; btn.disabled = false; btn.setAttribute('aria-disabled','false');
+        btn.setAttribute('aria-label', 'Step '+(i+1)+': '+btn.querySelector('.step-label-text').textContent.trim()+' — completed');
+      } else if (i === targetStep) {
+        btn.dataset.state = 'current'; btn.setAttribute('aria-current','step'); btn.disabled = false; btn.setAttribute('aria-disabled','false');
+        btn.setAttribute('aria-label', 'Step '+(i+1)+': '+btn.querySelector('.step-label-text').textContent.trim()+' — current step');
+      } else {
+        btn.dataset.state = 'todo'; btn.disabled = true; btn.setAttribute('aria-disabled','true');
+        btn.setAttribute('aria-label', 'Step '+(i+1)+': '+btn.querySelector('.step-label-text').textContent.trim()+' — not yet reached');
+      }
+    });
+    connectors.forEach((conn, i) => { conn.classList.toggle('done', i < targetStep); });
+    currentStep = targetStep;
+
+    if (targetStep === 3) updateContext('corp');
+    if (targetStep === 5) updateContext('country');
+    if (targetStep === 7) populateSummary();
+
+    const heading = document.querySelector('#step-'+targetStep+' h2');
+    if (heading) { heading.setAttribute('tabindex','-1'); heading.focus({ preventScroll: true }); }
+    document.getElementById('main-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function startTutorial() {
+    const input = document.getElementById('student-name');
+    const errorEl = document.getElementById('name-error');
+    if (!input.value.trim()) {
+      input.setAttribute('aria-invalid','true'); errorEl.setAttribute('aria-hidden','false'); input.focus();
+      announce('Error: Please enter your full name to begin.'); return;
+    }
+    input.setAttribute('aria-invalid','false'); errorEl.setAttribute('aria-hidden','true');
+    goToStep(1);
+    announce('Welcome, '+input.value.trim()+'. Proceeding to the introduction — step 1 of 7.');
+  }
+
+  function updateContext(which) {
+    const company = document.getElementById('ws-company').value.trim();
+    const country = document.getElementById('ws-country').value.trim();
+    if (which === 'corp') {
+      const el = document.getElementById('corp-context-text');
+      el.innerHTML = company
+        ? 'Now it’s your turn. Take 5 minutes to search MarketLine for <strong>'+escapeHtml(company)+'</strong>.'
+        : 'Now it’s your turn. Take 5 minutes to search MarketLine for the company your team is considering.';
+    }
+    if (which === 'country') {
+      const el = document.getElementById('country-context-text');
+      el.innerHTML = country
+        ? 'Spend 5 minutes exploring the MarketLine country report for <strong>'+escapeHtml(country)+'</strong> (or another target country you’re considering).'
+        : 'Pick a potential target country and spend 5 minutes exploring its MarketLine country report.';
+    }
+  }
+
+  function validate(type, nextStep) {
+    if (type === 'intro') {
+      const companyField = document.getElementById('ws-company');
+      const countryField = document.getElementById('ws-country');
+      const companyErr = document.getElementById('company-error');
+      const countryErr = document.getElementById('country-error');
+      let valid = true;
+      if (!companyField.value.trim()) { companyField.setAttribute('aria-invalid','true'); companyErr.setAttribute('aria-hidden','false'); if (valid) companyField.focus(); valid = false; }
+      else { companyField.setAttribute('aria-invalid','false'); companyErr.setAttribute('aria-hidden','true'); }
+      if (!countryField.value.trim()) { countryField.setAttribute('aria-invalid','true'); countryErr.setAttribute('aria-hidden','false'); if (valid) countryField.focus(); valid = false; }
+      else { countryField.setAttribute('aria-invalid','false'); countryErr.setAttribute('aria-hidden','true'); }
+      if (!valid) { announce('Error: Please enter both a company and a target country before continuing.'); return; }
+      goToStep(nextStep);
+      announce('Saved. Moving to step 2 of 7, corporate research demo.'); return;
+    }
+    if (type === 'corp-practice') {
+      const fields = [
+        ['ws-geo-markets','geo-error'],
+        ['ws-strength','strength-error'],
+        ['ws-weakness','weakness-error']
+      ];
+      let valid = true; let firstInvalid = null;
+      fields.forEach(([fid, eid]) => {
+        const f = document.getElementById(fid), e = document.getElementById(eid);
+        if (!f.value.trim()) { f.setAttribute('aria-invalid','true'); e.setAttribute('aria-hidden','false'); if (!firstInvalid) firstInvalid = f; valid = false; }
+        else { f.setAttribute('aria-invalid','false'); e.setAttribute('aria-hidden','true'); }
+      });
+      if (!valid) { firstInvalid.focus(); announce('Error: Please complete all three fields before continuing.'); return; }
+      goToStep(nextStep);
+      announce('Corporate research notes saved. Moving to step 4 of 7, country and market analysis demo.'); return;
+    }
+    if (type === 'country-practice') {
+      const fields = [
+        ['ws-econ-indicator','econ-error'],
+        ['ws-challenge','challenge-error'],
+        ['ws-industry-report','industry-error']
+      ];
+      let valid = true; let firstInvalid = null;
+      fields.forEach(([fid, eid]) => {
+        const f = document.getElementById(fid), e = document.getElementById(eid);
+        if (!f.value.trim()) { f.setAttribute('aria-invalid','true'); e.setAttribute('aria-hidden','false'); if (!firstInvalid) firstInvalid = f; valid = false; }
+        else { f.setAttribute('aria-invalid','false'); e.setAttribute('aria-hidden','true'); }
+      });
+      if (!valid) { firstInvalid.focus(); announce('Error: Please complete all three fields before continuing.'); return; }
+      goToStep(nextStep);
+      announce('Country research notes saved. Moving to step 6 of 7, wrap-up and next steps.'); return;
+    }
+  }
+
+  function populateSummary() {
+    document.getElementById('sum-company').textContent = document.getElementById('ws-company').value.trim();
+    document.getElementById('sum-country').textContent = document.getElementById('ws-country').value.trim();
+    document.getElementById('sum-geo').textContent = document.getElementById('ws-geo-markets').value.trim();
+    document.getElementById('sum-strength').textContent = document.getElementById('ws-strength').value.trim();
+    document.getElementById('sum-weakness').textContent = document.getElementById('ws-weakness').value.trim();
+    document.getElementById('sum-econ').textContent = document.getElementById('ws-econ-indicator').value.trim();
+    document.getElementById('sum-challenge').textContent = document.getElementById('ws-challenge').value.trim();
+    document.getElementById('sum-industry').textContent = document.getElementById('ws-industry-report').value.trim();
+  }
+
+  function downloadPDF() {
+    const btn = document.getElementById('download-btn');
+    btn.disabled = true; btn.textContent = 'Generating PDF…';
+    announce('Generating your PDF research notes, please wait.');
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+      const PW = doc.internal.pageSize.getWidth();
+      const PH = doc.internal.pageSize.getHeight();
+      const ML = 20, MR = 20, CW = PW - ML - MR, FOOTER = 12;
+      let y = 0;
+      const RED=[163,15,39], BLACK=[26,26,26], GRAY=[92,92,92], LTGRY=[247,247,247], BRDGRY=[199,199,199], WHITE=[255,255,255], BLUE=[12,59,114], INFOBL=[235,243,255];
+
+      function drawPageHeader() {
+        doc.setFillColor(...RED); doc.rect(0,0,PW,22,'F');
+        doc.setTextColor(...WHITE); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+        doc.text('Market Entry Research — MarketLine Notes',ML,10);
+        doc.setFont('helvetica','normal'); doc.setFontSize(8);
+        doc.text('INTB 1203  ·  Northeastern University',ML,17);
+        const today = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+        doc.text(today,PW-MR,17,{align:'right'});
+      }
+      function drawPageFooter(pageNum, totalPages) {
+        doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(...GRAY);
+        doc.text('Northeastern University Library — INTB 1203',ML,PH-6);
+        doc.text('Page '+pageNum+' of '+totalPages,PW-MR,PH-6,{align:'right'});
+        doc.setDrawColor(...BRDGRY); doc.setLineWidth(0.3); doc.line(ML,PH-9,PW-MR,PH-9);
+      }
+      function newPage() { doc.addPage(); drawPageHeader(); y = 30; }
+      function checkSpace(needed) { if (y+needed > PH-FOOTER-10) newPage(); }
+      function addField(label, value) {
+        const safeVal = value || '(No response provided)';
+        const lines = doc.splitTextToSize(safeVal, CW-10);
+        const boxH = lines.length*5.2+10;
+        checkSpace(20+boxH);
+        doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...RED);
+        doc.text(label.toUpperCase(),ML,y); y+=5;
+        doc.setFillColor(...LTGRY); doc.setDrawColor(...BRDGRY); doc.setLineWidth(0.3);
+        doc.roundedRect(ML,y,CW,boxH,2,2,'FD');
+        doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(...BLACK);
+        let textY = y+7;
+        for (const line of lines) {
+          if (textY > PH-FOOTER-12) { newPage(); textY=y; }
+          doc.text(line,ML+5,textY); textY+=5.2;
+        }
+        y = textY+6;
+      }
+
+      drawPageHeader(); y = 30;
+      doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(...BLACK);
+      doc.text('MarketLine Research Notes',ML,y); y+=7;
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(...GRAY);
+      const subLines = doc.splitTextToSize('Notes from your MarketLine Advantage research session, for use in your Market Entry Project.',CW);
+      subLines.forEach(line => { doc.text(line,ML,y); y+=5; }); y+=4;
+      doc.setDrawColor(...RED); doc.setLineWidth(1); doc.line(ML,y,PW-MR,y); y+=8;
+
+      const name = document.getElementById('student-name').value.trim();
+      const company = document.getElementById('ws-company').value.trim();
+      const country = document.getElementById('ws-country').value.trim();
+      const geo = document.getElementById('ws-geo-markets').value.trim();
+      const strength = document.getElementById('ws-strength').value.trim();
+      const weakness = document.getElementById('ws-weakness').value.trim();
+      const econ = document.getElementById('ws-econ-indicator').value.trim();
+      const challenge = document.getElementById('ws-challenge').value.trim();
+      const industry = document.getElementById('ws-industry-report').value.trim();
+
+      addField('Student Name', name);
+      addField('Company', company);
+      addField('Target Country', country);
+      addField('Geographic Markets Where They Currently Operate', geo);
+      addField('Key Strength Supporting Expansion', strength);
+      addField('Challenge or Weakness', weakness);
+      addField('Economic Indicator Suggesting Opportunity', econ);
+      addField('Potential Challenge in Target Country', challenge);
+      addField('Relevant Industry Report', industry);
+
+      checkSpace(36); y+=2;
+      doc.setFillColor(...INFOBL); doc.setDrawColor(126,184,247); doc.setLineWidth(0.3);
+      doc.roundedRect(ML,y,CW,32,2,2,'FD');
+      doc.setFillColor(...RED); doc.rect(ML,y,3,32,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...BLUE);
+      doc.text('Reminder: Next Steps',ML+7,y+8);
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+      const reminder = 'Use MarketLine to evaluate 2-3 countries before choosing your final target. Combine company strengths with country opportunities to tell a compelling story, and keep track of report details for your citations.';
+      const remLines = doc.splitTextToSize(reminder,CW-12);
+      let ry = y+15;
+      remLines.forEach(line => { doc.text(line,ML+7,ry); ry+=4.5; }); y=ry+6;
+
+      newPage();
+      doc.setFont('helvetica','bold'); doc.setFontSize(15); doc.setTextColor(...BLACK);
+      doc.text('MarketLine Quick-Reference Handout',ML,y); y+=10;
+
+      function addChecklist(title, items) {
+        checkSpace(14);
+        doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(...RED);
+        doc.text(title,ML,y); y+=6;
+        doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...BLACK);
+        items.forEach(item => {
+          const lines = doc.splitTextToSize('• '+item, CW-4);
+          checkSpace(lines.length*5+2);
+          lines.forEach(line => { doc.text(line,ML+2,y); y+=5; });
+        });
+        y+=4;
+      }
+
+      addChecklist('Accessing MarketLine', [
+        'Sign in via link.ezproxy.neu.edu using your Northeastern username and password, then search MarketLine Advantage.'
+      ]);
+      addChecklist('Company Research Checklist', [
+        'Overview — business model, products/services, geographic presence',
+        'Financial Performance — revenue trends, profitability, growth trajectory',
+        'Operations — current markets, competitive position',
+        'SWOT Analysis — strengths supporting expansion, weaknesses to consider'
+      ]);
+      addChecklist('Country Analysis Checklist', [
+        'Economic Overview — GDP, growth rate, economic stability',
+        'Political Environment — regulatory climate, ease of doing business',
+        'Demographics — population size, age distribution, urbanization',
+        'Consumer Market — spending patterns, middle class growth',
+        'Infrastructure — transportation, digital connectivity',
+        'Industry Analysis — sector-specific reports for your company'
+      ]);
+      addChecklist('Citation Format (APA) — confirm your instructor’s required style', [
+        'Company profile: MarketLine. (Year). [Company name]: Company profile. MarketLine.',
+        'Country report: MarketLine. (Year). [Country name]: In-depth PESTLE insights. MarketLine.'
+      ]);
+
+      const totalPages = doc.internal.getNumberOfPages();
+      for (let i=1; i<=totalPages; i++) { doc.setPage(i); drawPageFooter(i,totalPages); }
+      const safeName = (name||'student').replace(/[^a-z0-9]/gi,'_').replace(/_+/g,'_').toLowerCase();
+      doc.save('marketline_research_notes_'+safeName+'.pdf');
+      announce('Your research notes PDF has been downloaded successfully.');
+    } catch(err) {
+      console.error('PDF error:',err);
+      announce('There was a problem generating the PDF. Please try again.');
+    }
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Download Research Notes as PDF';
+    btn.disabled = false;
+  }
+
+  document.querySelectorAll('.step-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const step = parseInt(btn.dataset.step, 10);
+      if (btn.dataset.state === 'done') { goToStep(step); announce('Navigating back to step '+(step+1)+'.'); }
+    });
+  });
+</script>
+</body>
+</html>
